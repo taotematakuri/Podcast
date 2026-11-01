@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Well on Your Way</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Kaushan+Script&family=Montserrat:wght@500&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: calm single page in the spirit of the clinic site; brand colors come straight from the Well on Your Way logo (navy, steel blue, leaf green); navy waitlist card anchors the hero */
+:root {
+  --bg: #f6f9f8;
+  --surface: #ffffff;
+  --ink: #1b2733;
+  --muted: #56666f;
+  --line: #dbe4e1;
+  --navy: #1e2b4d;
+  --navy-ink: #ffffff;
+  --navy-muted: #c3cde0;
+  --green: #437f2e;
+  --leaf: #4e8e34;
+  --green-soft: #e8f1e3;
+  --steel: #3d6e8c;
+  --steel-soft: #e4edf3;
+  --field: #ffffff;
+  --field-ink: #1b2733;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --script: "Kaushan Script", "Brush Script MT", cursive;
+  --mark: "Abril Fatface", "Fraunces", Georgia, serif;
+  --caps: "Montserrat", "Public Sans", system-ui, sans-serif;
+  --body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1922; --surface: #15232f; --ink: #e7eef1; --muted: #9fb1ba; --line: #263744;
+    --navy: #22325a; --navy-ink: #ffffff; --navy-muted: #bcc7dc;
+    --green: #8cc56f; --leaf: #8cc56f; --green-soft: #1b2e22; --steel: #8fb8d3; --steel-soft: #172a38;
+    --field: #0f1922; --field-ink: #e7eef1; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1922; --surface: #15232f; --ink: #e7eef1; --muted: #9fb1ba; --line: #263744;
+  --navy: #22325a; --navy-ink: #ffffff; --navy-muted: #bcc7dc;
+  --green: #8cc56f; --leaf: #8cc56f; --green-soft: #1b2e22; --steel: #8fb8d3; --steel-soft: #172a38;
+  --field: #0f1922; --field-ink: #e7eef1; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+a { color: var(--green); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.15; text-wrap: balance; margin: 0; color: var(--ink); }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.5rem); }
+h3 { font-size: 1.3rem; }
+p { margin: 0; }
+.band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: clamp(56px, 8vw, 96px); }
+.band.white { background: var(--surface); border-block: 1px solid var(--line); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+.eyebrow { font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+.section-head { display: grid; gap: 12px; max-width: 46rem; margin-bottom: 40px; }
+.section-head p { color: var(--muted); }
+
+/* Header */
+header.site { background: var(--surface); border-bottom: 1px solid var(--line); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 18px; }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.wordmark { text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1; }
+.wordmark .mark { height: 38px; width: auto; flex: none; }
+.wordmark .lockup { display: grid; }
+.wordmark .name { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; }
+.wordmark .name b { font-family: var(--mark); font-weight: 400; font-size: 1.75rem; letter-spacing: .03em; color: var(--navy); }
+.wordmark .name em { font-family: var(--script); font-style: normal; font-size: 1.35rem; color: var(--leaf); }
+.wordmark .tag { font-family: var(--caps); font-weight: 500; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+nav.main { display: flex; gap: 6px 22px; flex-wrap: wrap; align-items: center; font-size: .95rem; }
+nav.main a { color: var(--ink); text-decoration: none; }
+nav.main a:hover { color: var(--green); }
+nav.main a.cta { background: var(--green); color: #fff; padding: 8px 16px; border-radius: 6px; font-weight: 600; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .wordmark .name b { color: #e6ecf5; } :root:not([data-theme="light"]) .wordmark .mark { filter: drop-shadow(0 0 1px rgba(255,255,255,.55)); } }
+:root[data-theme="dark"] .wordmark .name b { color: #e6ecf5; }
+:root[data-theme="dark"] .wordmark .mark { filter: drop-shadow(0 0 1px rgba(255,255,255,.55)); }
+
+/* Hero */
+.hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero h1 { font-size: clamp(2.4rem, 5.4vw, 3.9rem); }
+.hero h1 span { color: var(--green); }
+.hero .lead { font-size: 1.15rem; color: var(--muted); max-width: 36rem; }
+.start-note { display: inline-flex; align-items: center; gap: 10px; background: var(--steel-soft); color: var(--ink); padding: 10px 14px; border-radius: 8px; font-size: .95rem; width: fit-content; max-width: 100%; }
+.start-note b { color: var(--navy); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .start-note b { color: var(--steel); } }
+:root[data-theme="dark"] .start-note b { color: var(--steel); }
+
+.waitlist { background: var(--navy); color: var(--navy-ink); border-radius: 14px; padding: clamp(24px, 3vw, 34px); display: grid; gap: 16px; box-shadow: 0 18px 40px -24px rgba(15, 30, 50, .55); min-width: 0; }
+.waitlist h2 { color: var(--navy-ink); font-size: 1.7rem; }
+.waitlist p.small { font-size: .88rem; color: var(--navy-muted); }
+.waitlist form { display: grid; gap: 12px; }
+.waitlist > p:not(.small) { color: var(--navy-muted); }
+.wl-address { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-weight: 600; color: var(--navy-ink) !important; overflow-wrap: anywhere; }
+.copy { font: inherit; font-size: .8rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--navy-muted); background: transparent; color: var(--navy-ink); cursor: pointer; }
+.waitlist label { font-size: .85rem; font-weight: 600; display: grid; gap: 6px; }
+.waitlist input, .waitlist select { font: inherit; font-size: 1rem; padding: 11px 12px; border-radius: 7px; border: 1px solid transparent; background: var(--field); color: var(--field-ink); width: 100%; }
+.btn { font: inherit; font-weight: 700; border: 0; border-radius: 7px; padding: 13px 18px; cursor: pointer; background: var(--green); color: #fff; text-decoration: none; display: inline-block; text-align: center; }
+.btn:hover { filter: brightness(1.08); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn, :root:not([data-theme="light"]) nav.main a.cta { color: #0f1922; } }
+:root[data-theme="dark"] .btn, :root[data-theme="dark"] nav.main a.cta { color: #0f1922; }
+.success { background: rgba(255,255,255,.1); border-radius: 8px; padding: 16px; }
+.success strong { display: block; font-family: var(--display); font-size: 1.2rem; margin-bottom: 4px; }
+
+/* Approach */
+.approach .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
+.approach .section-head { margin-bottom: 0; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; counter-reset: step; }
+.steps li { counter-increment: step; display: flex; gap: 12px; align-items: center; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-weight: 600; min-width: 0; }
+.steps li::before { content: counter(step); font-family: var(--display); font-size: 1.3rem; color: var(--green); width: 1.4em; flex: none; }
+.ideas { display: grid; gap: 18px; margin-top: 28px; }
+.idea { border-left: 3px solid var(--steel); padding-left: 16px; }
+.idea b { display: block; font-family: var(--display); font-size: 1.15rem; margin-bottom: 2px; }
+.idea p { color: var(--muted); }
+
+/* Courses */
+.courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.course { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px; display: grid; gap: 14px; grid-template-rows: auto auto auto 1fr auto; min-width: 0; }
+.course.featured { border: 2px solid var(--green); }
+.course .flag { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); min-height: 1.2em; }
+.course .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-block: 1px solid var(--line); padding-block: 10px; }
+.course .price { font-family: var(--display); font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.course .length { font-size: .9rem; color: var(--muted); }
+.course .price s { font-size: 1.05rem; font-weight: 500; color: var(--muted); margin-right: 6px; text-decoration-thickness: 2px; }
+.course .founding { flex-basis: 100%; font-size: .82rem; font-weight: 700; letter-spacing: .04em; color: var(--green); background: var(--green-soft); border-radius: 6px; padding: 5px 10px; }
+.course .for { color: var(--muted); }
+.course ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: .95rem; }
+.course .btn { width: 100%; }
+.pricing-note { margin-top: 22px; color: var(--muted); font-size: .95rem; }
+
+/* Challenges */
+.challenge-box { margin-top: 56px; background: var(--green-soft); border-radius: 14px; padding: clamp(24px, 4vw, 40px); display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px; align-items: center; }
+.challenge-box > div { display: grid; gap: 14px; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: .9rem; font-weight: 500; }
+.btn.outline { background: transparent; color: var(--green); border: 2px solid var(--green); width: fit-content; }
+
+/* Meet */
+.people { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.person { display: grid; grid-template-columns: 160px 1fr; gap: 22px; align-items: start; }
+.photo { aspect-ratio: 4 / 5; max-width: 100%; border-radius: 12px; background: linear-gradient(160deg, var(--steel-soft), var(--green-soft)); border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: .8rem; padding: 10px; }
+.portrait { width: 100%; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; display: block; }
+.meet-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; margin-bottom: 48px; }
+.meet-top .section-head { margin-bottom: 0; }
+.duo { width: 100%; max-width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; border-radius: 14px; display: block; }
+.photo span { display: block; font-family: var(--display); font-size: 2.2rem; color: var(--navy); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .photo span { color: var(--steel); } }
+:root[data-theme="dark"] .photo span { color: var(--steel); }
+.person .role { color: var(--green); font-weight: 600; font-size: .92rem; margin: 4px 0 10px; }
+.person p.bio { color: var(--muted); }
+
+/* Testimonials */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.quote { border: 1px dashed var(--line); border-radius: 12px; padding: 26px; display: grid; gap: 14px; background: var(--bg); }
+.quote .mark { font-family: var(--display); font-size: 3rem; line-height: .6; color: var(--steel); }
+.quote p { color: var(--muted); font-style: italic; }
+.quote .who { font-size: .85rem; font-weight: 600; color: var(--ink); font-style: normal; }
+
+/* Learn */
+.channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.channel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 10px; text-decoration: none; color: var(--ink); }
+.channel:hover { border-color: var(--green); }
+.channel .kind { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+.channel p { color: var(--muted); font-size: .95rem; }
+.channel .go { font-weight: 600; color: var(--green); }
+.episodes { margin-top: 28px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.episodes a { display: flex; justify-content: space-between; gap: 16px; padding: 14px 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.episodes a:hover { color: var(--green); }
+.episodes small { color: var(--muted); white-space: nowrap; }
+
+/* Freebie + FAQ */
+.freebie { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; background: var(--steel-soft); border-radius: 12px; padding: 24px 28px; margin-bottom: 56px; }
+.freebie > div { display: grid; gap: 4px; min-width: 0; flex: 1 1 320px; }
+.freebie b { font-family: var(--display); font-size: 1.3rem; }
+.freebie p { color: var(--muted); }
+.faq { display: grid; gap: 10px; max-width: 46rem; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; }
+summary { cursor: pointer; font-weight: 600; }
+details p { color: var(--muted); margin-top: 10px; }
+
+/* Footer */
+footer.site { background: var(--navy); color: var(--navy-muted); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 44px; font-size: .9rem; }
+footer.site .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+footer.site .wordmark .name b { color: #fff; }
+footer.site .wordmark .name em { color: #9fd38a; }
+footer.site .wordmark .mark { filter: drop-shadow(0 0 1px rgba(255,255,255,.6)); }
+footer.site .wordmark .tag { color: var(--navy-muted); }
+footer.site a { color: #fff; }
+footer.site .disclaimer { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.15); padding-top: 20px; font-size: .82rem; }
+
+@media (max-width: 900px) {
+  .meet-top { grid-template-columns: 1fr; }
+  .hero .wrap, .approach .wrap, .challenge-box, .people { grid-template-columns: 1fr; }
+  .courses, .quotes, .channels { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .wordmark .mark { height: 30px; }
+  .wordmark .name b { font-size: 1.45rem; }
+  .wordmark .name em { font-size: 1.12rem; }
+  .steps { grid-template-columns: 1fr; }
+  .person { grid-template-columns: 1fr; }
+  .person .portrait { max-width: 220px; }
+  footer.site .wrap { grid-template-columns: 1fr; }
+  nav.main { font-size: .9rem; }
+}
+
+/* base reset formerly supplied by the host */
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="Well on Your Way home"><img class="mark" src="images/mark.png" alt="" width="114" height="38"><span class="lockup"><span class="name"><b>WELL</b><em>on Your Way</em></span><span class="tag">Weight Loss · Lifestyle · Longevity</span></span></a>
+    <nav class="main" aria-label="Main">
+      <a href="#approach">Our approach</a>
+      <a href="#courses">Courses</a>
+      <a href="#meet">About us</a>
+      <a href="#learn">Podcast &amp; articles</a>
+      <a class="cta" href="#waitlist">Join the waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO + WAITLIST -->
+  <section class="band hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Clinician-led coaching · St. George, Utah and online</span>
+        <h1>Lose the weight. <span>Keep it this time.</span></h1>
+        <p class="lead">We're a physician and a nurse practitioner who both had to lose the weight ourselves. Our group courses help you, whether you use a GLP-1 or not, to build small, achievable habits that hold long after you reach your target weight.</p>
+        <p class="start-note"><b>First cohorts begin January 2027.</b> Join the waitlist and you'll get the dates first.</p>
+      </div>
+
+      <aside class="waitlist" id="waitlist" aria-labelledby="wl-title">
+        <h2 id="wl-title">Join the waitlist</h2>
+        <!-- KIT: until the Kit form is ready, people join by email. The full form version is saved as index-kit-form-version.html. -->
+        <p>Email us and we'll add you to the list. Tell us which course fits you, or just say hello and we'll help you choose.</p>
+        <a class="btn" id="wl-mail" href="mailto:info@wellonyourway.health?subject=Waitlist">Email us to join</a>
+        <p class="wl-address">info@wellonyourway.health <button type="button" class="copy" id="wl-copy">Copy</button></p>
+        <p class="small">We'll email you when dates are set, and you can ask to be taken off the list anytime.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="band white approach" id="approach">
+    <div class="wrap">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">Our approach</span>
+          <h2>Small steps that carry a lot of weight</h2>
+          <p>Health isn't made or broken by one meal or one decision. It's the result of small, achievable efforts kept up over a long stretch of time. Everything we teach comes back to eight of them.</p>
+        </div>
+        <div class="ideas">
+          <div class="idea">
+            <b>A tool, not an end result</b>
+            <p>A GLP-1 can open a window of opportunity. We help you use that window to build habits you can carry forward once the medication is no longer doing the heavy lifting.</p>
+          </div>
+          <div class="idea">
+            <b>A calorie deficit, not a nutrition deficit</b>
+            <p>Eating less shouldn't mean starving your body of what it needs. We focus on body composition: keeping muscle while you lose fat, the way a sculptor shapes the whole statue instead of chipping off a chunk of marble.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:14px">The Eight Steps to Wellness</p>
+        <ol class="steps">
+          <li>The 25% Rule</li>
+          <li>Move More, Stress Less</li>
+          <li>Hydrate for Health</li>
+          <li>Cut Back on Sugar</li>
+          <li>Power Up with Protein</li>
+          <li>Sleep</li>
+          <li>The Real Food Regimen</li>
+          <li>Time Your Meals Right</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="band" id="courses">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Courses</span>
+        <h2>Three courses, one philosophy</h2>
+        <p>Each course is a small group that meets live on Zoom, with recorded lessons and short emails in between. Pick the one that matches where you are right now.</p>
+      </div>
+      <div class="courses">
+        <article class="course featured">
+          <span class="flag">Most people start here</span>
+          <h3>GLP-1 Foundations</h3>
+          <div class="meta"><span class="price"><s>$1,300</s>$650</span><span class="length">10 weeks</span><span class="founding">50% off for the first 50 to enroll</span></div>
+          <div style="display:grid;gap:12px">
+            <p class="for">For anyone starting a GLP-1, or starting fresh on any weight loss plan, who wants the results to last this time.</p>
+            <ul>
+              <li>Welcome call, weekly group calls, and a final call</li>
+              <li>Personal weekly check-in calls, one-on-one with a member of our team</li>
+              <li>A one-page illustrated guide for every step, written in plain language</li>
+              <li>A workbook for building your own plan</li>
+              <li>Wellness Daily meal planning and tracking app</li>
+              <li>Recorded lessons and emails throughout</li>
+            </ul>
+          </div>
+          <a class="btn" href="#waitlist" data-interest="foundations">Join the Foundations waitlist</a>
+        </article>
+        <article class="course">
+          <span class="flag"></span>
+          <h3>Restart</h3>
+          <div class="meta"><span class="price"><s>$700</s>$350</span><span class="length">Six weeks</span><span class="founding">50% off for the first 50 to enroll</span></div>
+          <div style="display:grid;gap:12px">
+            <p class="for">For people several months into a GLP-1 who have lost weight, stalled short of their goal, and are tired of the creep back up. A plateau is normal, and there are specific ways through it.</p>
+            <ul>
+              <li>Welcome call, weekly group calls, and a final call</li>
+              <li>Personal weekly check-in calls, one-on-one with a member of our team</li>
+              <li>A one-page illustrated guide for every step, written in plain language</li>
+              <li>A workbook focused on breaking the plateau</li>
+              <li>Wellness Daily meal planning and tracking app</li>
+              <li>Educational emails throughout</li>
+            </ul>
+          </div>
+          <a class="btn" href="#waitlist" data-interest="restart">Join the Restart waitlist</a>
+        </article>
+        <article class="course">
+          <span class="flag"></span>
+          <h3>Wellness Transformation</h3>
+          <div class="meta"><span class="price"><s>$900</s>$450</span><span class="length">Eight weeks</span><span class="founding">50% off for the first 50 to enroll</span></div>
+          <div style="display:grid;gap:12px">
+            <p class="for">For anyone not on a GLP-1 who wants better health, and some weight loss, through lifestyle change. One step each week.</p>
+            <ul>
+              <li>Welcome call, weekly group calls, and a final call</li>
+              <li>Personal weekly check-in calls, one-on-one with a member of our team</li>
+              <li>A one-page illustrated guide for every step, written in plain language</li>
+              <li>A workbook with one step per week</li>
+              <li>Wellness Daily meal planning and tracking app</li>
+              <li>Educational emails throughout</li>
+            </ul>
+          </div>
+          <a class="btn" href="#waitlist" data-interest="transformation">Join the Transformation waitlist</a>
+        </article>
+      </div>
+      <p class="pricing-note">Founding-member pricing: the first 50 people to enroll in each course pay half the regular price. Waitlist members hear about enrollment first.</p>
+
+      <div class="challenge-box">
+        <div>
+          <span class="eyebrow">Not ready for a full course?</span>
+          <h3 style="font-size:1.6rem">Try a five-day challenge</h3>
+          <p>Each challenge takes one of the eight steps and gives you a week to put it into practice, with a live call, short emails, and a handout you can keep. Dates and details are coming soon.</p>
+          <a class="btn outline" href="#waitlist" data-interest="challenge">Tell me when challenges open</a>
+        </div>
+        <div class="chips" aria-label="Challenge topics">
+          <span class="chip">The 25% Rule</span>
+          <span class="chip">Move More, Stress Less</span>
+          <span class="chip">Hydrate for Health</span>
+          <span class="chip">Cut Back on Sugar</span>
+          <span class="chip">Power Up with Protein</span>
+          <span class="chip">Sleep</span>
+          <span class="chip">The Real Food Regimen</span>
+          <span class="chip">Time Your Meals Right</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET -->
+  <section class="band white" id="meet">
+    <div class="wrap">
+      <div class="meet-top">
+        <div class="section-head">
+          <span class="eyebrow">About us</span>
+          <h2>We give this advice for a living. Then we had to take it.</h2>
+          <p>Well on Your Way started with two friends from the emergency department who both lost the weight themselves, and learned that keeping it off is where the real work is.</p>
+        </div>
+        <img class="duo" src="images/rick-and-greg.jpg" alt="Greg Camp and Rick Sorensen standing together outside">
+      </div>
+      <div class="people">
+        <div class="person">
+          <img class="portrait" src="images/rick-sorensen.jpg" alt="Rick Sorensen">
+          <div>
+            <h3>Rick Sorensen, MD</h3>
+            <p class="role">Emergency physician · Co-founder</p>
+            <p class="bio">Rick spent 14 years as an Air Force physician and more than 25 in emergency medicine. One Christmas he gave his wife an unusual gift: they would both go through Greg's clinic as patients. Each lost about 60 pounds. Being the patient taught him the plan has to account for life after the losing, starting on day one.</p>
+          </div>
+        </div>
+        <div class="person">
+          <img class="portrait" src="images/greg-camp.jpg" alt="Greg Camp">
+          <div>
+            <h3>Greg Camp, FNP-C</h3>
+            <p class="role">Emergency nurse practitioner · Co-founder</p>
+            <p class="bio">Greg served 10 years in the Army, then drifted slowly from his health once that structure was gone. Over about two years he lost roughly 50 pounds, and the framework he built became St. George Weight Loss and Wellness, the clinic he has run for five years while still working in the ER.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (placeholders) -->
+  <section class="band" id="stories">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Client stories</span>
+        <h2>In their own words</h2>
+      </div>
+      <div class="quotes">
+        <figure class="quote" style="margin:0"><span class="mark">“</span><p>Client story coming soon.</p><figcaption class="who">Name, course</figcaption></figure>
+        <figure class="quote" style="margin:0"><span class="mark">“</span><p>Client story coming soon.</p><figcaption class="who">Name, course</figcaption></figure>
+        <figure class="quote" style="margin:0"><span class="mark">“</span><p>Client story coming soon.</p><figcaption class="who">Name, course</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARN -->
+  <section class="band white" id="learn">
+    <div class="wrap">
+      <div class="freebie">
+        <div>
+          <b>A free meal plan is on its way</b>
+          <p>Join the waitlist and we'll send it to you as soon as it's ready.</p>
+        </div>
+        <a class="btn" href="#waitlist">Send it to me</a>
+      </div>
+
+      <div class="section-head">
+        <span class="eyebrow">Learn with us before January</span>
+        <h2>Listen, watch, or read</h2>
+        <p>Every week we take one question we hear in clinic and walk through the why behind it.</p>
+      </div>
+      <div class="channels">
+        <a class="channel" href="https://wellonyourway.buzzsprout.com" target="_blank" rel="noopener">
+          <span class="kind">Podcast</span>
+          <h3>Well on Your Way</h3>
+          <p>Rick and Greg on GLP-1s, plateaus, hormones, and metabolic health.</p>
+          <span class="go">Listen →</span>
+        </a>
+        <a class="channel" href="https://www.youtube.com/channel/UCLdQXq_Fo5cq22bCbuUnuQA" target="_blank" rel="noopener">
+          <span class="kind">YouTube</span>
+          <h3>Watch the episodes</h3>
+          <p>Full episodes on video, with timestamps so you can jump to your question.</p>
+          <span class="go">Watch →</span>
+        </a>
+        <a class="channel" href="https://substack.com/@wellonyourway" target="_blank" rel="noopener">
+          <span class="kind">Substack</span>
+          <h3>The newsletter</h3>
+          <p>Articles on the science and the real-life side of losing weight and keeping it off.</p>
+          <span class="go">Read →</span>
+        </a>
+      </div>
+      <!-- LINKS: episodes point at the YouTube channel for now; swap in each episode URL when available -->
+      <div class="episodes" aria-label="Recent episodes">
+        <a href="https://www.youtube.com/channel/UCLdQXq_Fo5cq22bCbuUnuQA" target="_blank" rel="noopener">GLP-1 Injection Sites: Does It Actually Matter Where You Inject? <small>Episode</small></a>
+        <a href="https://www.youtube.com/channel/UCLdQXq_Fo5cq22bCbuUnuQA" target="_blank" rel="noopener">Oral GLP-1 Pills vs. Injections: Which One Is Right for You? <small>Episode</small></a>
+        <a href="https://www.youtube.com/channel/UCLdQXq_Fo5cq22bCbuUnuQA" target="_blank" rel="noopener">Processed vs. Ultra-Processed Foods: What's the Difference? <small>Episode</small></a>
+        <a href="https://www.youtube.com/channel/UCLdQXq_Fo5cq22bCbuUnuQA" target="_blank" rel="noopener">Glycemic Index vs. Glycemic Load: What It Means for Your Plate <small>Episode</small></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Questions</span>
+        <h2>Before you sign up</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Do I have to be on a GLP-1?</summary>
+          <p>No. Foundations and Restart are built for people using a GLP-1. Wellness Transformation teaches the same eight steps for people improving their health without medication.</p>
+        </details>
+        <details>
+          <summary>Do you prescribe or adjust medication?</summary>
+          <p>No. Our courses are education and coaching. Decisions about your medication stay between you and your own prescriber, and we'll help you know what questions to bring them.</p>
+        </details>
+        <details>
+          <summary>How much time does a course take?</summary>
+          <p>Plan on one live group call and one personal check-in call each week, plus short emails and recorded lessons you can watch on your own schedule.</p>
+        </details>
+        <details>
+          <summary>When do courses start?</summary>
+          <p>Our first cohorts begin in January 2027. Exact dates go to the waitlist first.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div style="display:grid;gap:14px">
+      <a class="wordmark" href="#top" aria-label="Well on Your Way home"><img class="mark" src="images/mark.png" alt="" width="114" height="38"><span class="lockup"><span class="name"><b>WELL</b><em>on Your Way</em></span><span class="tag">Weight Loss · Lifestyle · Longevity</span></span></a>
+      <p>Small steps add up. You're well on your way.</p>
+    </div>
+    <div style="display:grid;gap:6px">
+      <span>info@wellonyourway.health</span>
+      <span>1240 E 100 S, Unit 11, St. George, UT 84790</span>
+      <span><a href="https://substack.com/@wellonyourway" target="_blank" rel="noopener">Substack</a> · <a href="https://wellonyourway.buzzsprout.com" target="_blank" rel="noopener">Podcast</a> · <a href="https://www.youtube.com/channel/UCLdQXq_Fo5cq22bCbuUnuQA" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/well_on_your_way/" target="_blank" rel="noopener">Instagram</a></span>
+    </div>
+    <p class="disclaimer">Well on Your Way provides education and coaching for general informational purposes. It is not medical advice and does not replace care from your own medical provider. Talk with your provider before starting or changing any medication or weight loss plan. Well on Your Way is a brand of Support My Weight Loss LLC. © 2026 Support My Weight Loss LLC.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var subjects = { foundations: 'Waitlist: GLP-1 Foundations', restart: 'Waitlist: Restart', transformation: 'Waitlist: Wellness Transformation', challenge: 'Waitlist: Five-day challenges' };
+  var mail = document.getElementById('wl-mail');
+  document.querySelectorAll('[data-interest]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var sub = subjects[a.getAttribute('data-interest')] || 'Waitlist';
+      mail.href = 'mailto:info@wellonyourway.health?subject=' + encodeURIComponent(sub);
+    });
+  });
+  var copy = document.getElementById('wl-copy');
+  copy.addEventListener('click', function () {
+    var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1800); };
+    if (navigator.clipboard) { navigator.clipboard.writeText('info@wellonyourway.health').then(done, function () {}); }
+  });
+})();
+</script>
+</body>
+</html>
